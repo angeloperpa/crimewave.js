@@ -2,6 +2,7 @@ var HEIGHT_MAX = window.innerHeight;
 var WIDTH_MAX = window.innerWidth;
 var SIZE_MAX = 6;
 var CIRCLES_MAX = 100;
+var VELOCITY = 4;
 var c = document.getElementById('crimewave');
 c.height = HEIGHT_MAX;
 c.width = WIDTH_MAX;
@@ -40,11 +41,14 @@ function drawCrime() {
 }
 function moveCrime() {
 	var i = Math.floor((Math.random() * (CIRCLES_MAX - 1)) + 1);
-		if(circles[i].y < WIDTH_MAX || circles[i].y > HEIGHT_MAX 
-		|| circles[i].x < WIDTH_MAX || circles[i].x > HEIGHT_MAX) {
-			circles[i].x += Math.random();
-			circles[i].y += Math.random();
-		}
-
+	var randDirection = Math.floor((Math.random() * 4) + 1);
+			if(randDirection == 1)
+				circles[i].x += VELOCITY;
+			else if(randDirection == 2)
+				circles[i].x -= VELOCITY;
+			else if(randDirection == 3)
+				circles[i].y += VELOCITY;
+			else if(randDirection == 4)
+				circles[i].y -= VELOCITY;
 }
 window.requestAnimationFrame(drawCrime);
